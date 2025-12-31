@@ -148,6 +148,7 @@ export function AdoptionChart() {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [activeEvent, setActiveEvent] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Scrubber state
   const scrubberX = useMotionValue(0);
@@ -161,12 +162,13 @@ export function AdoptionChart() {
 
   const chartPadding = { left: 40, right: 20, top: 30, bottom: 30 };
 
-  // Handle resize
+  // Handle resize and detect mobile
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
         setDimensions({ width: rect.width, height: rect.height });
+        setIsMobile(window.innerWidth < 640);
       }
     };
 
@@ -248,24 +250,26 @@ export function AdoptionChart() {
         <LiveTicker />
       </div>
 
-      <CompanyCounter ahead={companyStats.ahead} behind={companyStats.behind} />
+      {!isMobile && <CompanyCounter ahead={companyStats.ahead} behind={companyStats.behind} />}
 
       <div
         ref={containerRef}
         className="relative h-[320px] md:h-[400px] w-full mt-6"
       >
-        {/* Future blur overlay */}
-        <div
-          className="absolute pointer-events-none z-10 transition-all duration-100"
-          style={{
-            left: currentX,
-            top: chartPadding.top,
-            right: chartPadding.right,
-            bottom: chartPadding.bottom,
-            backdropFilter: isDragging ? "none" : "blur(2px)",
-            background: isDragging ? "transparent" : "linear-gradient(90deg, transparent, rgba(8,8,12,0.3) 20%)",
-          }}
-        />
+        {/* Future blur overlay - desktop only */}
+        {!isMobile && (
+          <div
+            className="absolute pointer-events-none z-10 transition-all duration-100"
+            style={{
+              left: currentX,
+              top: chartPadding.top,
+              right: chartPadding.right,
+              bottom: chartPadding.bottom,
+              backdropFilter: isDragging ? "none" : "blur(2px)",
+              background: isDragging ? "transparent" : "linear-gradient(90deg, transparent, rgba(8,8,12,0.3) 20%)",
+            }}
+          />
+        )}
 
         {/* Particles */}
         {isVisible && <ChartParticles />}
@@ -339,8 +343,8 @@ export function AdoptionChart() {
           </AreaChart>
         </ResponsiveContainer>
 
-        {/* Draggable scrubber */}
-        {dimensions.width > 0 && (
+        {/* Draggable scrubber - hidden on mobile */}
+        {dimensions.width > 0 && !isMobile && (
           <motion.div
             className="absolute z-30 cursor-grab active:cursor-grabbing"
             style={{
@@ -416,18 +420,22 @@ export function AdoptionChart() {
           <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-secondary" />
           <span className="text-white/60">Enterprise multi-agent</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-tertiary"></span>
-          </span>
-          <span className="text-white/60">Drag to explore</span>
-        </div>
+        {!isMobile && (
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-tertiary"></span>
+            </span>
+            <span className="text-white/60">Drag to explore</span>
+          </div>
+        )}
       </div>
 
-      <p className="text-center text-white/30 text-xs mt-4">
-        The future is uncertain until you drag through it.
-      </p>
+      {!isMobile && (
+        <p className="text-center text-white/30 text-xs mt-4">
+          The future is uncertain until you drag through it.
+        </p>
+      )}
     </motion.div>
   );
 }

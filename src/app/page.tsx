@@ -116,16 +116,16 @@ export default function Home() {
       </section>
 
       {/* Three Pillars Section - Live Dashboard */}
-      <section id="pillars" className="py-32 px-6">
+      <section id="pillars" className="py-16 sm:py-32 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <TextReveal>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 text-center">
               Three pillars of <GradientText>agent infrastructure</GradientText>
             </h2>
           </TextReveal>
 
           <TextReveal delay={0.1}>
-            <p className="text-xl text-white/60 text-center max-w-2xl mx-auto mb-8">
+            <p className="text-base sm:text-xl text-white/60 text-center max-w-2xl mx-auto mb-8">
               Every production agent system needs memory, coordination, and communication.
               We build each layer to work independently or together.
             </p>
@@ -133,7 +133,7 @@ export default function Home() {
 
           <DeploymentCounter />
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
             <LivePillarCard
               icon={<DatabaseIcon color="#00f5d4" />}
               title="RAG Knowledge System"
