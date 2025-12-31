@@ -17,6 +17,7 @@ import { MagneticButton, RippleContainer } from "@/components/ui/magnetic-button
 import { RAGCrisisSection } from "@/components/ui/rag-crisis";
 import { AgentDatabaseSection } from "@/components/ui/agent-database";
 import { AgentEmailSection } from "@/components/ui/agent-email";
+import { IntakeForm } from "@/components/ui/intake-form";
 
 function TextReveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -201,23 +202,21 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="py-32 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+      <section id="contact" className="py-16 sm:py-32 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
           <TextReveal>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-center">
               Ready to build <GradientText>agent infrastructure</GradientText> that scales?
             </h2>
           </TextReveal>
           <TextReveal delay={0.1}>
-            <p className="text-xl text-white/60 mb-10 max-w-2xl mx-auto">
+            <p className="text-base sm:text-xl text-white/60 mb-8 sm:mb-10 max-w-2xl mx-auto text-center">
               We work directly with engineering teams to design and deploy custom MCP tools.
               No sales calls. Just a conversation about what you&apos;re building.
             </p>
           </TextReveal>
           <TextReveal delay={0.2}>
-            <MagneticButton href="mailto:clarkkitchen22@gmail.com">
-              Talk to us about your agent stack
-            </MagneticButton>
+            <IntakeForm />
           </TextReveal>
         </div>
       </section>
