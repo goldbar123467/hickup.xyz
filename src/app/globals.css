@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #08080c;
+  --primary: #00f5d4;
+  --secondary: #8b5cf6;
+  --tertiary: #ec4899;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: var(--background);
+  color: #ffffff;
+}
+
+body {
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(0, 245, 212, 0.3);
+  color: #ffffff;
+}
+
+/* Glassmorphism utility */
+.glass {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* SVG pulse animation for chart dot */
+@keyframes pulse-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Tabular nums for countdown timer */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
