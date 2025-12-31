@@ -83,7 +83,7 @@ function EventCard({
 
 function CompanyCounter({ ahead, behind }: { ahead: number; behind: number }) {
   return (
-    <div className="flex items-center justify-center gap-6 text-sm">
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-xs sm:text-sm">
       <div className="flex items-center gap-2">
         <div className="w-2 h-2 rounded-full bg-secondary" />
         <span className="text-white/50">
@@ -116,16 +116,16 @@ function LiveTicker() {
 
   return (
     <motion.div
-      className="flex items-center gap-3"
+      className="flex items-center gap-2 sm:gap-3"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.5 }}
     >
-      <span className="relative flex h-3 w-3">
+      <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+        <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-primary"></span>
       </span>
-      <span className="text-white/60 text-sm">
+      <span className="text-white/60 text-xs sm:text-sm">
         <motion.span
           className="font-mono font-bold text-white"
           animate={{
@@ -137,7 +137,7 @@ function LiveTicker() {
         >
           {count.toLocaleString()}
         </motion.span>
-        {" "}companies adopted this week
+        {" "}adopted this week
       </span>
     </motion.div>
   );
@@ -240,9 +240,9 @@ export function AdoptionChart() {
     >
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
         <div>
-          <h3 className="text-2xl font-bold mb-2">AI Agent Adoption Forecast</h3>
-          <p className="text-white/60 text-sm">
-            Drag the timeline to see the future unfold. Watch the window close.
+          <h3 className="text-xl sm:text-2xl font-bold mb-2">AI Agent Adoption Forecast</h3>
+          <p className="text-white/60 text-xs sm:text-sm">
+            Drag the timeline to see the future unfold.
           </p>
         </div>
         <LiveTicker />
@@ -300,9 +300,10 @@ export function AdoptionChart() {
               dataKey="month"
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }}
+              tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 10 }}
               dy={10}
-              interval="preserveStartEnd"
+              interval={dimensions.width < 500 ? 4 : "preserveStartEnd"}
+              tickFormatter={(value) => dimensions.width < 400 ? value.slice(-2) : value}
             />
             <YAxis
               axisLine={false}
@@ -406,21 +407,21 @@ export function AdoptionChart() {
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap gap-6 mt-6 text-sm">
+      <div className="flex flex-wrap gap-3 sm:gap-6 mt-6 text-xs sm:text-sm">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-primary" />
-          <span className="text-white/60">All businesses with AI agents</span>
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-primary" />
+          <span className="text-white/60">AI agent adoption</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-secondary" />
-          <span className="text-white/60">Enterprises with multi-agent systems</span>
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-secondary" />
+          <span className="text-white/60">Enterprise multi-agent</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="relative flex h-3 w-3">
+          <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-tertiary"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-tertiary"></span>
           </span>
-          <span className="text-white/60">Drag to explore the timeline</span>
+          <span className="text-white/60">Drag to explore</span>
         </div>
       </div>
 

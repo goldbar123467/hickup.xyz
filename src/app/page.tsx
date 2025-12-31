@@ -70,19 +70,19 @@ export default function Home() {
           </TextReveal>
 
           <TextReveal delay={0.1}>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
               AI agents answer <CyclingText />
             </h1>
           </TextReveal>
 
           <TextReveal delay={0.2}>
-            <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white/80">
+            <h2 className="text-xl sm:text-3xl md:text-5xl font-bold mb-8 text-white/80">
               MCP tools answer <span className="text-white">how do we get AI agents to do what we want</span>
             </h2>
           </TextReveal>
 
           <TextReveal delay={0.3}>
-            <p className="text-xl text-white/60 max-w-2xl mb-12">
+            <p className="text-base sm:text-xl text-white/60 max-w-2xl mb-12">
               We build the infrastructure that makes AI agents reliable, coordinated, and controllable.
               Not wrappers. Not abstractions. The actual systems that run underneath.
             </p>
